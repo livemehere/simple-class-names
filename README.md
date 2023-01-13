@@ -1,5 +1,7 @@
 # simple-class-names
 
+[npm](https://www.npmjs.com/package/simple-class-names)
+
 A function that simply toggle classNames in the React.
 
 what you need is really just one function!
