@@ -1,14 +1,23 @@
-/**
- * @param args List up classNames as strings and objects
- */
-function cn(...args :any[]){
-    args = args.map(s=> {
-        if(typeof s === 'object'){
-            return Object.keys(s).map(k=> !!s[k] ? k : undefined)
+
+function cn(...rest:any[]){
+    let classes:string[] = []
+    rest.forEach(r => {
+        if (Array.isArray(r)) {
+            if(r.length){
+                const inner = cn.apply(null,r)
+                classes.push(inner)
+            }
+        } else if(typeof r === 'object'){
+            Object.entries(r).forEach(([k,v])=>{
+                if(v){
+                    classes.push(k)
+                }
+            })
+        } else{
+            classes.push(r)
         }
-        return s;
     })
-    return args.flat().filter(s=> s).join(' ')
+    return classes.join(' ');
 }
 
 export default cn;
